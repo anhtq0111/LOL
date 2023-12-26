@@ -1,7 +1,7 @@
-spark:
+run-spark:
 	docker exec -it spark-master bash /bitnami/runspark.sh
 
-hdfs:
+run-hdfs:
 	docker exec -it namenode bash /data/hadoop.sh
 
 up:
@@ -10,4 +10,4 @@ up:
 down:
 	docker-compose down
 
-thread: up hdfs spark
+thread: up run-hdfs run-spark

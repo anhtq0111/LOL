@@ -11,8 +11,8 @@ spark = SparkSession\
         .appName("test")\
         .getOrCreate()
 
-df = spark.read.json("hdfs://namenode:8020/data/Match11_player5.json")
-newdf = df.select(df['championName'], df['teamPosition'], df['win'])
+df = spark.read.json("hdfs://namenode:8020/data", recursiveFileLookup=True)
+newdf = df.select('championName', 'teamPosition', 'visionScore', 'kills', 'deaths', 'assists', 'win')
 
 newdf.write.format("com.mongodb.spark.sql.connector.MongoTableProvider")\
         .option("database", "test")\
@@ -20,3 +20,4 @@ newdf.write.format("com.mongodb.spark.sql.connector.MongoTableProvider")\
         .mode("append")\
         .save()
 # newdf.show()
+# df.printSchema()
