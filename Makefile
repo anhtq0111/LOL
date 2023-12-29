@@ -10,4 +10,7 @@ up:
 down:
 	docker-compose down
 
-thread: up run-hdfs run-spark
+crawl: 
+	python .\Crawl.py
+
+thread: crawl up run-hdfs run-spark
